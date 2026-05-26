@@ -1,199 +1,409 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>CLTBeat | Charlotte Growth, Development, Business & Real Estate</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>CLTBeat | Charlotte Development, Business & Real Estate</title>
+
   <style>
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       background: #050505;
       color: white;
       font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
     }
 
-    .page {
-      min-height: 100vh;
-      padding: 40px;
+    .background-glow {
+      position: fixed;
+      inset: 0;
       background:
-        radial-gradient(circle at top right, rgba(0, 130, 84, 0.35), transparent 35%),
-        linear-gradient(135deg, #050505 0%, #101010 100%);
+        radial-gradient(circle at top right, rgba(255, 0, 43, 0.20), transparent 30%),
+        radial-gradient(circle at bottom left, rgba(255, 0, 43, 0.12), transparent 30%);
+      z-index: -1;
     }
 
-    .nav {
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: 1100px;
-      margin: 0 auto 90px;
+      padding: 32px 0;
     }
 
     .logo {
-      font-size: 28px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo img {
+      width: 56px;
+      height: auto;
+    }
+
+    .logo-text {
+      font-size: 34px;
       font-weight: 900;
-      letter-spacing: -1px;
+      letter-spacing: -2px;
     }
 
-    .logo span {
-      color: #008254;
+    .logo-text span {
+      color: #ff002b;
     }
 
-    .nav a {
-      color: white;
+    .nav-button {
       text-decoration: none;
-      font-weight: 700;
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 12px 18px;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 14px 22px;
       border-radius: 999px;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .nav-button:hover {
+      background: rgba(255,255,255,0.08);
     }
 
     .hero {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 40px 0 80px;
+      padding: 80px 0 70px;
     }
 
     .eyebrow {
-      color: #00b878;
-      font-weight: 800;
+      color: #ff002b;
+      font-size: 14px;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 22px;
+      font-weight: 900;
+      margin-bottom: 24px;
     }
 
     h1 {
-      font-size: clamp(52px, 9vw, 110px);
+      font-size: clamp(58px, 9vw, 120px);
       line-height: 0.92;
-      margin: 0 0 30px;
-      letter-spacing: -5px;
-      max-width: 950px;
+      letter-spacing: -6px;
+      max-width: 1000px;
+      margin-bottom: 30px;
     }
 
     .subhead {
-      font-size: clamp(20px, 3vw, 30px);
-      line-height: 1.35;
-      color: rgba(255,255,255,0.78);
-      max-width: 780px;
+      max-width: 760px;
+      color: rgba(255,255,255,0.72);
+      font-size: clamp(22px, 3vw, 30px);
+      line-height: 1.4;
       margin-bottom: 42px;
     }
 
-    .buttons {
+    .hero-buttons {
       display: flex;
       gap: 16px;
       flex-wrap: wrap;
     }
 
-    .button-primary {
-      background: white;
-      color: black;
-      text-decoration: none;
-      padding: 16px 24px;
-      border-radius: 14px;
-      font-weight: 900;
-    }
-
-    .button-secondary {
+    .primary-btn {
+      background: #ff002b;
       color: white;
       text-decoration: none;
-      padding: 16px 24px;
-      border-radius: 14px;
+      padding: 18px 28px;
+      border-radius: 16px;
       font-weight: 900;
-      border: 1px solid rgba(255,255,255,0.25);
+      transition: 0.2s ease;
     }
 
-    .cards {
-      max-width: 1100px;
-      margin: 30px auto 0;
+    .primary-btn:hover {
+      opacity: 0.9;
+    }
+
+    .secondary-btn {
+      border: 1px solid rgba(255,255,255,0.18);
+      color: white;
+      text-decoration: none;
+      padding: 18px 28px;
+      border-radius: 16px;
+      font-weight: 900;
+    }
+
+    .hero-image {
+      margin-top: 70px;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .hero-image img {
+      width: 100%;
+      display: block;
+    }
+
+    .section {
+      padding: 90px 0;
+    }
+
+    .section-title {
+      font-size: 48px;
+      margin-bottom: 50px;
+      letter-spacing: -2px;
+    }
+
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
     }
 
     .card {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 22px;
-      padding: 24px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 30px;
+      transition: 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,0,43,0.35);
     }
 
     .card h3 {
-      margin: 0 0 12px;
-      font-size: 22px;
+      font-size: 26px;
+      margin-bottom: 14px;
     }
 
     .card p {
-      margin: 0;
-      color: rgba(255,255,255,0.68);
-      line-height: 1.5;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+      font-size: 17px;
     }
 
     .about {
-      max-width: 1100px;
-      margin: 80px auto 0;
-      border-top: 1px solid rgba(255,255,255,0.12);
-      padding-top: 50px;
-      color: rgba(255,255,255,0.76);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+
+    .about p {
+      color: rgba(255,255,255,0.72);
+      line-height: 1.7;
       font-size: 20px;
-      line-height: 1.55;
+      margin-bottom: 24px;
     }
 
     .about strong {
       color: white;
     }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 40px 0;
+      margin-top: 60px;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    @media (max-width: 900px) {
+      .about {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      h1 {
+        letter-spacing: -4px;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <main class="page">
-    <nav class="nav">
-      <div class="logo">♛ CLT<span>Beat</span></div>
-      <a href="https://instagram.com/cltbeat">Follow @CLTBeat</a>
+
+  <div class="background-glow"></div>
+
+  <div class="container">
+
+    <nav>
+      <div class="logo">
+        <img src="YOUR-LOGO.png" alt="CLTBeat Logo">
+        <div class="logo-text">
+          CLT<span>Beat</span>
+        </div>
+      </div>
+
+      <a class="nav-button" href="https://instagram.com/cltbeat" target="_blank">
+        Follow @CLTBeat
+      </a>
     </nav>
 
     <section class="hero">
-      <div class="eyebrow">Charlotte is changing fast</div>
 
-      <h1>Know what is shaping Charlotte before everyone else does.</h1>
+      <div class="eyebrow">
+        Charlotte Development • Business • Real Estate
+      </div>
+
+      <h1>
+        Charlotte is changing faster than most people realize.
+      </h1>
 
       <p class="subhead">
-        CLTBeat tracks Charlotte development, business growth, infrastructure, neighborhoods, and real estate trends.
+        CLTBeat tracks the projects, companies, neighborhoods, infrastructure, and economic shifts reshaping the Charlotte region.
       </p>
 
-      <div class="buttons">
-        <a class="button-primary" href="https://instagram.com/cltbeat">Follow CLTBeat</a>
-        <a class="button-secondary" href="mailto:hello@cltbeat.com">Contact Michael</a>
+      <div class="hero-buttons">
+        <a class="primary-btn" href="https://instagram.com/cltbeat" target="_blank">
+          Follow CLTBeat
+        </a>
+
+        <a class="secondary-btn" href="mailto:hello@cltbeat.com">
+          Contact Michael
+        </a>
       </div>
+
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1577086664693-894d8405334a?q=80&w=1800&auto=format&fit=crop" alt="Charlotte Skyline">
+      </div>
+
     </section>
 
-    <section class="cards">
-      <div class="card">
-        <h3>Development</h3>
-        <p>New projects, rezonings, mixed use growth, and the decisions reshaping the city.</p>
+    <section class="section">
+
+      <h2 class="section-title">
+        What CLTBeat Covers
+      </h2>
+
+      <div class="grid">
+
+        <div class="card">
+          <h3>Development</h3>
+          <p>
+            Rezoning cases, mixed use projects, towers, infrastructure, and growth shaping Charlotte’s future.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Business</h3>
+          <p>
+            Restaurant openings, corporate expansions, relocations, and major economic signals.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Real Estate</h3>
+          <p>
+            Housing demand, neighborhood trends, condo markets, and relocation insights.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Neighborhoods</h3>
+          <p>
+            How different parts of Charlotte are evolving and what that means long term.
+          </p>
+        </div>
+
       </div>
 
-      <div class="card">
-        <h3>Business</h3>
-        <p>Restaurant openings, corporate expansions, relocations, and local economic signals.</p>
-      </div>
-
-      <div class="card">
-        <h3>Real Estate</h3>
-        <p>Housing trends, neighborhood demand, condo insight, and relocation strategy.</p>
-      </div>
-
-      <div class="card">
-        <h3>Neighborhoods</h3>
-        <p>What different areas of Charlotte are becoming and why it matters.</p>
-      </div>
     </section>
 
-    <section class="about">
-      <p>
-        <strong>CLTBeat is created by Michael Cook, a Charlotte based realtor</strong> who tracks the stories that shape where people live, work, invest, and spend time.
-      </p>
+    <section class="section">
 
-      <p>
-        The goal is simple. Cut through the noise and explain what Charlotte growth actually means.
-      </p>
+      <div class="about">
+
+        <div>
+          <h2 class="section-title">
+            Why CLTBeat Exists
+          </h2>
+
+          <p>
+            Charlotte is experiencing one of the biggest transformation cycles in the Southeast.
+          </p>
+
+          <p>
+            New infrastructure, rezonings, corporate relocations, and housing demand are reshaping the region in real time.
+          </p>
+
+          <p>
+            CLTBeat exists to help people understand what is changing and why it matters.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="section-title">
+            About Michael Cook
+          </h2>
+
+          <p>
+            <strong>CLTBeat is created by Michael Cook</strong>, a Charlotte based realtor focused on local development, growth, and housing trends.
+          </p>
+
+          <p>
+            The mission is simple:
+          </p>
+
+          <p>
+            Explain the forces shaping where Charlotte lives, works, invests, and grows.
+          </p>
+        </div>
+
+      </div>
+
     </section>
-  </main>
+
+    <footer>
+
+      <div class="footer-row">
+
+        <div>
+          © CLTBeat
+        </div>
+
+        <div class="footer-links">
+          <a href="https://instagram.com/cltbeat" target="_blank">Instagram</a>
+          <a href="#">YouTube</a>
+          <a href="#">TikTok</a>
+          <a href="#">LinkedIn</a>
+        </div>
+
+      </div>
+
+    </footer>
+
+  </div>
+
 </body>
 </html>
