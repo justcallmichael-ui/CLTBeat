@@ -1,10 +1,199 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CLTBeat</title>
+  <title>CLTBeat | Charlotte Growth, Development, Business & Real Estate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      background: #050505;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 40px;
+      background:
+        radial-gradient(circle at top right, rgba(0, 130, 84, 0.35), transparent 35%),
+        linear-gradient(135deg, #050505 0%, #101010 100%);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto 90px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #008254;
+    }
+
+    .nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 12px 18px;
+      border-radius: 999px;
+    }
+
+    .hero {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 0 80px;
+    }
+
+    .eyebrow {
+      color: #00b878;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(52px, 9vw, 110px);
+      line-height: 0.92;
+      margin: 0 0 30px;
+      letter-spacing: -5px;
+      max-width: 950px;
+    }
+
+    .subhead {
+      font-size: clamp(20px, 3vw, 30px);
+      line-height: 1.35;
+      color: rgba(255,255,255,0.78);
+      max-width: 780px;
+      margin-bottom: 42px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .button-primary {
+      background: white;
+      color: black;
+      text-decoration: none;
+      padding: 16px 24px;
+      border-radius: 14px;
+      font-weight: 900;
+    }
+
+    .button-secondary {
+      color: white;
+      text-decoration: none;
+      padding: 16px 24px;
+      border-radius: 14px;
+      font-weight: 900;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    .cards {
+      max-width: 1100px;
+      margin: 30px auto 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 22px;
+      padding: 24px;
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-size: 22px;
+    }
+
+    .card p {
+      margin: 0;
+      color: rgba(255,255,255,0.68);
+      line-height: 1.5;
+    }
+
+    .about {
+      max-width: 1100px;
+      margin: 80px auto 0;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      padding-top: 50px;
+      color: rgba(255,255,255,0.76);
+      font-size: 20px;
+      line-height: 1.55;
+    }
+
+    .about strong {
+      color: white;
+    }
+  </style>
 </head>
-<body style="background:#050505;color:white;font-family:Arial;padding:60px;">
-  <h1>CLTBeat</h1>
-  <p>Charlotte growth, development, business, and real estate explained.</p>
+<body>
+  <main class="page">
+    <nav class="nav">
+      <div class="logo">♛ CLT<span>Beat</span></div>
+      <a href="https://instagram.com/cltbeat">Follow @CLTBeat</a>
+    </nav>
+
+    <section class="hero">
+      <div class="eyebrow">Charlotte is changing fast</div>
+
+      <h1>Know what is shaping Charlotte before everyone else does.</h1>
+
+      <p class="subhead">
+        CLTBeat tracks Charlotte development, business growth, infrastructure, neighborhoods, and real estate trends.
+      </p>
+
+      <div class="buttons">
+        <a class="button-primary" href="https://instagram.com/cltbeat">Follow CLTBeat</a>
+        <a class="button-secondary" href="mailto:hello@cltbeat.com">Contact Michael</a>
+      </div>
+    </section>
+
+    <section class="cards">
+      <div class="card">
+        <h3>Development</h3>
+        <p>New projects, rezonings, mixed use growth, and the decisions reshaping the city.</p>
+      </div>
+
+      <div class="card">
+        <h3>Business</h3>
+        <p>Restaurant openings, corporate expansions, relocations, and local economic signals.</p>
+      </div>
+
+      <div class="card">
+        <h3>Real Estate</h3>
+        <p>Housing trends, neighborhood demand, condo insight, and relocation strategy.</p>
+      </div>
+
+      <div class="card">
+        <h3>Neighborhoods</h3>
+        <p>What different areas of Charlotte are becoming and why it matters.</p>
+      </div>
+    </section>
+
+    <section class="about">
+      <p>
+        <strong>CLTBeat is created by Michael Cook, a Charlotte based realtor</strong> who tracks the stories that shape where people live, work, invest, and spend time.
+      </p>
+
+      <p>
+        The goal is simple. Cut through the noise and explain what Charlotte growth actually means.
+      </p>
+    </section>
+  </main>
 </body>
 </html>
