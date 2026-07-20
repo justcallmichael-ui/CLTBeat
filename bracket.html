@@ -34,7 +34,6 @@
   .progress-text{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:1px;text-align:center;margin-bottom:4px;}
   .progress-bar{height:5px;background:#eee;border-radius:3px;overflow:hidden;}
   .progress-bar div{height:100%;background:var(--red);width:0%;transition:width .3s;}
-  /* live result strip */
   #lastResult{
     width:min(92vw,420px);
     margin-top:8px;
@@ -45,9 +44,12 @@
     display:none;
   }
   #lastResult .lr-title{font-size:10px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:#999;margin-bottom:4px;}
-  #lastResult .lr-bar{display:flex;height:20px;border-radius:5px;overflow:hidden;font-size:10px;font-weight:900;color:#fff;}
-  #lastResult .lr-a{background:var(--red);display:flex;align-items:center;padding:0 6px;white-space:nowrap;overflow:hidden;}
-  #lastResult .lr-b{background:var(--dark);display:flex;align-items:center;justify-content:flex-end;padding:0 6px;white-space:nowrap;overflow:hidden;}
+  #lastResult .lr-names{display:flex;justify-content:space-between;gap:10px;font-size:11px;font-weight:900;margin-bottom:3px;}
+  #lastResult .lr-names .na{color:var(--red);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  #lastResult .lr-names .nb{color:var(--dark);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;}
+  #lastResult .lr-bar{display:flex;height:12px;border-radius:5px;overflow:hidden;}
+  #lastResult .lr-a{background:var(--red);}
+  #lastResult .lr-b{background:var(--dark);}
   #lastResult .lr-votes{font-size:10px;color:#999;margin-top:3px;text-align:center;}
   #stage{
     position:relative;
@@ -62,6 +64,55 @@
     cursor:grab;will-change:transform;touch-action:none;
   }
   .card:active{cursor:grabbing;}
+  .card.locked{
+    background:var(--dark);
+    cursor:default;
+    align-items:center;justify-content:center;text-align:center;
+    color:var(--white);padding:24px;
+  }
+  .card.locked .lock{font-size:52px;}
+  .card.locked h2{font-size:24px;font-weight:900;text-transform:uppercase;margin-top:10px;line-height:1.05;}
+  .card.locked h2 span{color:var(--red);}
+  .card.locked .cd{
+    font-size:34px;font-weight:900;color:var(--red);margin-top:12px;letter-spacing:2px;
+    font-variant-numeric:tabular-nums;
+  }
+  .card.locked .nextinfo{font-size:12px;color:#bbb;margin-top:10px;line-height:1.6;text-transform:uppercase;letter-spacing:1px;}
+  .card.locked .tip{font-size:10px;color:#777;margin-top:16px;}
+  .follow-cta{
+    display:inline-block;
+    margin-top:14px;
+    background:var(--red);
+    color:var(--white);
+    text-decoration:none;
+    font-weight:900;
+    font-size:12px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    padding:11px 20px;
+    border-radius:24px;
+  }
+  .follow-note{
+    font-size:12px;
+    color:#bbb;
+    margin-top:14px;
+    line-height:1.6;
+  }
+  .card.nom{overflow-y:auto;justify-content:flex-start;padding-top:30px;}
+  .card.nom input{
+    width:100%;max-width:280px;margin-top:10px;padding:12px 14px;border:none;border-radius:10px;
+    font-family:inherit;font-size:15px;font-weight:700;text-align:center;outline:none;
+  }
+  .card.nom button{
+    margin-top:12px;background:var(--red);color:var(--white);border:none;font-weight:900;
+    font-size:13px;letter-spacing:2px;text-transform:uppercase;padding:12px 24px;border-radius:10px;cursor:pointer;
+  }
+  .card.nom .nom-list{
+    margin-top:14px;font-size:12px;color:#bbb;line-height:1.8;max-width:280px;
+  }
+  .card.nom .nom-list b{color:var(--white);}
+  .card.nom .nom-list a{color:var(--red);text-decoration:none;font-weight:900;}
+  .card.nom .thanks{margin-top:10px;color:var(--red);font-weight:900;font-size:13px;text-transform:uppercase;letter-spacing:1px;display:none;}
   .vs-tag{text-align:center;padding:12px 0 0;color:rgba(255,255,255,.85);font-weight:900;letter-spacing:3px;font-size:11px;text-transform:uppercase;}
   .matchup{flex:1;display:flex;flex-direction:column;justify-content:center;padding:8px 18px 14px;}
   .team{
@@ -159,6 +210,25 @@
   .field-region li:last-child{border-bottom:none;}
   .field-region .fs{color:#aaa;font-size:10px;font-weight:900;width:18px;flex-shrink:0;}
   .field-region a{color:var(--red);text-decoration:none;font-weight:900;font-size:10px;}
+  /* live ballot */
+  .ballot{width:min(96vw,560px);margin:0 auto;}
+  .ballot-note{text-align:center;font-size:11px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+  .b-row{display:flex;align-items:center;gap:8px;padding:6px 10px;border-bottom:1px solid #f2f2f2;font-weight:700;font-size:13px;}
+  .b-row.in64 .b-rank{color:var(--red);}
+  .b-rank{width:28px;color:#aaa;font-weight:900;font-size:11px;flex-shrink:0;}
+  .b-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .b-name a{color:var(--red);text-decoration:none;font-weight:900;font-size:10px;}
+  .b-count{font-weight:900;color:var(--red);font-size:13px;flex-shrink:0;min-width:34px;text-align:right;}
+  .b-btn{
+    background:var(--dark);color:var(--white);border:none;border-radius:8px;font-weight:900;
+    font-size:10px;letter-spacing:1px;padding:6px 10px;cursor:pointer;text-transform:uppercase;flex-shrink:0;
+  }
+  .b-btn:active{background:var(--red);}
+  .cutline{
+    display:flex;align-items:center;gap:10px;margin:8px 0;color:var(--red);
+    font-weight:900;font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  }
+  .cutline::before,.cutline::after{content:"";flex:1;border-top:2px dashed var(--red);}
   footer{width:min(92vw,420px);text-align:center;padding:8px 0 18px;}
   footer .cta{font-size:11px;font-weight:700;color:var(--dark);}
   footer .cta a{color:var(--red);text-decoration:none;font-weight:900;}
@@ -188,19 +258,21 @@
       <div class="label">Charlotte's People's Champion</div>
       <div class="winner" id="champName"></div>
       <div class="recap" id="champRecap"></div>
+      <a class="follow-cta" href="https://www.instagram.com/cltbeat/" target="_blank" rel="noopener">Follow @CLTBeat for live updates</a>
       <button onclick="restart()">Run It Back</button>
     </div>
   </div>
 
   <div id="lastResult">
     <div class="lr-title">Latest result &middot; simulated community vote</div>
+    <div class="lr-names"><span class="na" id="lrNameA"></span><span class="nb" id="lrNameB"></span></div>
     <div class="lr-bar"><div class="lr-a" id="lrA"></div><div class="lr-b" id="lrB"></div></div>
     <div class="lr-votes" id="lrVotes"></div>
   </div>
 
   <section id="bracketSection">
     <h2>The Full <span>Bracket</span></h2>
-    <div class="sub">Scroll sideways &#8594; &middot; winners &amp; vote shares fill in as you swipe</div>
+    <div class="sub">Scroll sideways &#8594; &middot; winners &amp; vote shares fill in as votes happen</div>
     <div class="ncaa-wrap"><div class="ncaa" id="ncaa"></div></div>
   </section>
 
@@ -216,9 +288,26 @@
 
 <script>
 // =====================================================================
+// SCHEDULE — edit START_DATE to launch day. Before that date, the page
+// runs NOMINATIONS (add your favorite + tag their IG). Then a one-week
+// tournament: ~40 seconds of swiping the first 3 days, tapering to a
+// single Championship vote on day 7.
+// Demo time travel: add ?day=3 to the URL to jump to tournament day 3.
+// =====================================================================
+const START_DATE = '2026-07-24';
+const DAY_BATCHES = [16,16,16,8,4,2,1]; // one-week tournament: 63 matchups over 7 days
+const DAY_LABELS = [
+  "Round of 64 — Uptown & South End",
+  "Round of 64 — NoDa & Plaza Midwood",
+  "Round of 32",
+  "Sweet 16",
+  "Elite 8",
+  "Final Four",
+  "Championship"
+];
+
+// =====================================================================
 // THE FIELD OF 64 — demo seeding from the original list + comment demand.
-// Region names are for flavor, not geography. Swap any name/seed freely.
-// "Wildcard" slots = to be filled by IG nominations.
 // =====================================================================
 const t = (s,n,ig)=>({s,n,ig});
 const regions = [
@@ -300,9 +389,31 @@ const seedPairs = [[1,16],[8,9],[5,12],[4,13],[6,11],[3,14],[7,10],[2,15]];
 const roundSizes = [32,16,8,4,2,1];
 const roundNames = ["Round of 64","Round of 32","Sweet 16","Elite 8","Final Four","Championship"];
 const totalMatchups = 63;
+const STORE_KEY = 'cltPizzaMadnessVotes';
 
 let rounds = [];
 let ri = 0, mi = 0, done = 0;
+let savedVotes = [];
+let lockTimer = null;
+
+function currentDay(){
+  const p = new URLSearchParams(location.search).get('day');
+  if(p) return Math.max(0, parseInt(p,10)-1);
+  const start = new Date(START_DATE+'T00:00:00');
+  return Math.floor((Date.now()-start.getTime())/86400000);
+}
+function dayOfIndex(i){
+  let cum = 0;
+  for(let d=0; d<DAY_BATCHES.length; d++){
+    cum += DAY_BATCHES[d];
+    if(i < cum) return d;
+  }
+  return DAY_BATCHES.length-1;
+}
+function unlockDate(day){
+  const start = new Date(START_DATE+'T00:00:00');
+  return new Date(start.getTime() + day*86400000);
+}
 
 function initRounds(){
   const first = [];
@@ -325,24 +436,49 @@ function initRounds(){
   }
 }
 
+function applyVote(v){
+  const m = rounds[ri][mi];
+  m.winner = (v.w === 'a') ? m.a : m.b;
+  m.pct = v.pct;
+  m.votes = v.v;
+  if(ri < 5){
+    const nm = rounds[ri+1][Math.floor(mi/2)];
+    if(mi % 2 === 0) nm.a = m.winner; else nm.b = m.winner;
+  }
+  done++;
+  mi++;
+  if(mi >= rounds[ri].length){ ri++; mi = 0; }
+  return m;
+}
+
 function start(){
   initRounds();
   ri = 0; mi = 0; done = 0;
+  if(lockTimer){ clearInterval(lockTimer); lockTimer = null; }
   document.getElementById('champ').style.display='none';
   document.getElementById('lastResult').style.display='none';
+  // restore saved votes
+  try{ savedVotes = JSON.parse(localStorage.getItem(STORE_KEY)) || []; }
+  catch(e){ savedVotes = []; }
+  let last = null;
+  for(const v of savedVotes){ last = applyVote(v); }
+  if(last) showLastResult(last);
   renderBracket();
-  renderField();
+  if(currentDay() < 0){ renderBallot(); } else { renderField(); }
   showNext();
 }
 
 function showNext(){
-  if(mi >= rounds[ri].length){ ri++; mi = 0; }
+  if(currentDay() < 0){ return showNominate(); }
   if(ri === 6){ return showChampion(rounds[5][0].winner); }
+
+  const day = dayOfIndex(done);
+  if(day > currentDay()){ return showLocked(day); }
 
   const m = rounds[ri][mi];
   document.getElementById('roundLabel').textContent = roundNames[ri];
   document.getElementById('progressText').textContent =
-    `${m.region} · Matchup ${mi+1} of ${rounds[ri].length} · ${done} / ${totalMatchups} total`;
+    `Day ${day+1} of ${DAY_BATCHES.length} · ${DAY_LABELS[day]} · ${done} / ${totalMatchups} total`;
   document.getElementById('progressFill').style.width = (done/totalMatchups*100)+'%';
 
   const card = document.createElement('div');
@@ -370,6 +506,177 @@ function showNext(){
   `;
   document.getElementById('stage').appendChild(card);
   attachSwipe(card, m);
+}
+
+// ---------------- LIVE BALLOT ----------------
+// Starter list = your original 20 (corrected) + every spot the comments demanded.
+// Consumers add theirs below — new spots enter the field instantly.
+// Demo counts are simulated; live version = real shared tallies.
+const STARTERS = [
+  {n:"Bisonte Pizza Co.",ig:"bisontepizzaco"},{n:"Due Amici",ig:"due_amici_pizzeria"},
+  {n:"Inizio Pizza",ig:"iniziopizza"},{n:"Bird Pizzeria",ig:"birdpizzeria"},
+  {n:"Hawthorne's",ig:null},{n:"Portofino's",ig:"portofinosus"},
+  {n:"Giacomo's",ig:null},{n:"Sal's Pizza Factory",ig:"salspizzafactory"},
+  {n:"Lorenzo's",ig:null},{n:"Tony's Pizza",ig:"tonys_bigpizza"},
+  {n:"Pizzeria Sapienza",ig:"pizzeriasapienzaclt"},{n:"Zepeddie's",ig:"zepeddies"},
+  {n:"Geno D's",ig:"genodspizza"},{n:"Gravity Sourdough",ig:"gravitypizzaclt"},
+  {n:"King of Fire",ig:"kingoffirepizza"},{n:"Pizza Baby",ig:"eatpizzababy"},
+  {n:"Finale Pizza",ig:"finalepizza"},{n:"Zambies",ig:"theshop.zambies"},
+  {n:"The Crust",ig:"thecrustpizzaclt"},{n:"Pizzeria Omaggio",ig:"omaggiopizzeria"},
+  {n:"Mama Ricotta's",ig:"mamaricottas"},{n:"Benny Pennello's",ig:"bennypennellos"},
+  {n:"Stagioni",ig:"stagioni_clt"},{n:"Brooklyn Pizza Parlor",ig:"brooklyn_pizza_parlor_colony"},
+  {n:"DaVinci's",ig:null},{n:"Intermezzo",ig:"intermezzo_pizzeria"},
+  {n:"Carmella's",ig:null},{n:"Levante's",ig:null},
+  {n:"Wheelz Pizza",ig:"wheelzpizza_clt"},{n:"Jett's",ig:null},
+  {n:"Siano's",ig:"sianospizzapasta"},{n:"Luigi's",ig:null},
+  {n:"Luisa's",ig:null},{n:"House of Pizza",ig:null},
+  {n:"Romeo & Juliet's",ig:null},{n:"Pie_zaa",ig:"pie_zaa"},
+  {n:"Pure Pizza (Plaza)",ig:"pureontheplaza"},{n:"Salud Cerveceria",ig:"saludcerveceria"},
+  {n:"Izzy's",ig:null},{n:"Livy's Neapolitan",ig:"livysneapolitan"},
+  {n:"Fuel Pizza",ig:"fuelpizza"},{n:"Johnny Tomatoes",ig:null},
+  {n:"Empire Pizza",ig:null},{n:"Taste of Buffalo",ig:null},
+  {n:"Slice House",ig:null},{n:"Wolfman Pizza",ig:null},
+  {n:"Emilio's (Fort Mill)",ig:null},{n:"Donatos (Fort Mill)",ig:"donatosfortmill"},
+  {n:"Benny Ferrovia's",ig:"bennyferrovias"},{n:"Neighbors 828",ig:"neighbors828artisankitchen"},
+  {n:"Brooklyn South",ig:null},{n:"Emmy Squared",ig:null},
+  {n:"Jet's",ig:null},{n:"NY Old School Bagel",ig:"new_york_old_school_bagel"},
+  {n:"Hungry Howie's",ig:null},{n:"Pizza Hut (N Tryon)",ig:null},
+  {n:"CiCi's",ig:null},
+];
+const BALLOT_KEY = 'cltPizzaBallot';
+const normKey = s => (s||'').toLowerCase().replace(/^@/,'').replace(/[^a-z0-9]/g,'');
+function loadBallot(){
+  try{
+    const b = JSON.parse(localStorage.getItem(BALLOT_KEY));
+    if(b && b.length) return b;
+  }catch(e){}
+  // simulated demo baseline counts
+  return STARTERS.map((s,i)=>({n:s.n, ig:s.ig, c: 140 - i*2 + ((i*7)%9)}));
+}
+function saveBallot(b){ try{ localStorage.setItem(BALLOT_KEY, JSON.stringify(b)); }catch(e){} }
+function addNomination(name, ig){
+  const b = loadBallot();
+  const nn = normKey(name), ni = normKey(ig);
+  let hit = b.find(x => (ni && normKey(x.ig) === ni) || normKey(x.n) === nn);
+  if(hit){ hit.c++; }
+  else { hit = {n:name, ig: ig ? ig.replace(/^@/,'') : null, c:1}; b.push(hit); }
+  saveBallot(b);
+  renderBallot();
+  return hit;
+}
+window.bumpBallot = function(key){
+  const b = loadBallot();
+  const hit = b.find(x => normKey(x.ig)+'|'+normKey(x.n) === key);
+  if(hit){ hit.c++; saveBallot(b); renderBallot(); }
+};
+function renderBallot(){
+  const b = loadBallot().sort((x,y)=>y.c-x.c);
+  document.querySelector('#field h2').innerHTML = 'The Live <span>Ballot</span>';
+  let html = `<div class="ballot"><div class="ballot-note">Top 64 at tip-off make the bracket &middot; final rank = seed &middot; ${b.length} spots on the ballot${b.length<64 ? ' &middot; room for '+(64-b.length)+' more' : ''}</div>`;
+  b.forEach((x,i)=>{
+    if(i === 64) html += `<div class="cutline">The Cut Line — 64</div>`;
+    const key = normKey(x.ig)+'|'+normKey(x.n);
+    html += `<div class="b-row${i<64?' in64':''}">
+      <span class="b-rank">${i+1}</span>
+      <span class="b-name">${x.n}${x.ig ? ' <a href="https://www.instagram.com/'+x.ig+'/" target="_blank" rel="noopener">@'+x.ig+'</a>' : ''}</span>
+      <span class="b-count">${x.c}</span>
+      <button class="b-btn" onclick="bumpBallot('${key}')">+1</button>
+    </div>`;
+  });
+  html += `</div>`;
+  document.getElementById('fieldGrid').innerHTML = html;
+}
+
+// ---------------- NOMINATION PHASE (before START_DATE) ----------------
+const NOM_KEY = 'cltPizzaNoms';
+function showNominate(){
+  document.getElementById('roundLabel').textContent = 'Nominations Open';
+  const start = unlockDate(0);
+  document.getElementById('progressText').textContent =
+    'Tournament tips off ' + start.toLocaleDateString(undefined,{weekday:'long', month:'long', day:'numeric'});
+  document.getElementById('progressFill').style.width = '0%';
+
+  const card = document.createElement('div');
+  card.className = 'card locked nom';
+  card.innerHTML = `
+    <div class="lock">&#127928;&#128293;&#127829;</div>
+    <h2>Nominate your<br><span>favorite spot</span></h2>
+    <div class="nextinfo">Missing from the ballot? Add them &amp; they enter the field instantly.<br>Already on it? Your entry counts as a seeding vote.<br>Tag their Instagram so they can campaign.</div>
+    <input id="nomName" placeholder="Pizza spot name" maxlength="40">
+    <input id="nomIg" placeholder="@their_instagram" maxlength="40">
+    <button id="nomBtn">Add / Vote</button>
+    <div class="thanks" id="nomThanks"></div>
+    <div class="cd" id="nomCd" style="font-size:22px;"></div>
+    <div class="nextinfo">until voting begins</div>
+    <a class="follow-cta" href="https://www.instagram.com/cltbeat/" target="_blank" rel="noopener">Follow @CLTBeat for live updates</a>
+    <div class="tip">Demo: nominations save on this device only.<br>Add ?day=1 to the URL to preview voting.</div>
+  `;
+  document.getElementById('stage').appendChild(card);
+
+  card.querySelector('#nomBtn').addEventListener('click', ()=>{
+    const name = card.querySelector('#nomName').value.trim();
+    const ig = card.querySelector('#nomIg').value.trim();
+    if(!name) return;
+    const before = loadBallot().length;
+    const hit = addNomination(name, ig);
+    const isNew = loadBallot().length > before;
+    card.querySelector('#nomName').value = '';
+    card.querySelector('#nomIg').value = '';
+    const th = document.getElementById('nomThanks');
+    th.style.display = 'block';
+    th.innerHTML = isNew
+      ? `&#128293; ${hit.n} just entered the field! Scroll down to see them on the ballot.`
+      : `&#9989; +1 seeding vote for ${hit.n} — now at ${hit.c}.`;
+  });
+
+  const cd = card.querySelector('#nomCd');
+  const tick = ()=>{
+    const ms = start.getTime() - Date.now();
+    if(ms <= 0){
+      clearInterval(lockTimer); lockTimer = null;
+      card.remove();
+      return showNext();
+    }
+    const d = Math.floor(ms/86400000), h = Math.floor(ms%86400000/3600000), mn = Math.floor(ms%3600000/60000), s = Math.floor(ms%60000/1000);
+    cd.textContent = (d>0 ? d+'d ' : '')+(h<10?'0':'')+h+':'+(mn<10?'0':'')+mn+':'+(s<10?'0':'')+s;
+  };
+  tick();
+  lockTimer = setInterval(tick, 1000);
+}
+
+function showLocked(day){
+  document.getElementById('roundLabel').textContent = 'Voting Closed For Today';
+  document.getElementById('progressText').textContent =
+    `${done} / ${totalMatchups} matchups decided`;
+  document.getElementById('progressFill').style.width = (done/totalMatchups*100)+'%';
+
+  const unlock = unlockDate(day);
+  const card = document.createElement('div');
+  card.className = 'card locked';
+  card.innerHTML = `
+    <div class="lock">&#128274;</div>
+    <h2>Today's votes<br>are <span>in</span></h2>
+    <div class="cd" id="lockCd"></div>
+    <div class="nextinfo">Next up: Day ${day+1} — ${DAY_LABELS[day]}<br>Come back &amp; keep your spot alive</div>
+    <div class="follow-note">Results &amp; upset alerts drop first on Instagram</div>
+    <a class="follow-cta" href="https://www.instagram.com/cltbeat/" target="_blank" rel="noopener">Follow @CLTBeat for live updates</a>
+    <div class="tip">Demo: add ?day=${day+1} to the URL to time-travel</div>
+  `;
+  document.getElementById('stage').appendChild(card);
+
+  const cd = card.querySelector('#lockCd');
+  const tick = ()=>{
+    const ms = unlock.getTime() - Date.now();
+    if(ms <= 0){
+      clearInterval(lockTimer); lockTimer = null;
+      card.remove();
+      return showNext();
+    }
+    const h = Math.floor(ms/3600000), mn = Math.floor(ms%3600000/60000), s = Math.floor(ms%60000/1000);
+    cd.textContent = (h<10?'0':'')+h+':'+(mn<10?'0':'')+mn+':'+(s<10?'0':'')+s;
+  };
+  tick();
+  lockTimer = setInterval(tick, 1000);
 }
 
 function attachSwipe(card, matchup){
@@ -406,8 +713,8 @@ function attachSwipe(card, matchup){
   const onUp = () => {
     if(!dragging) return;
     dragging = false;
-    if(dx < -110){ fling(card, -1, matchup, matchup.a); }
-    else if(dx > 110){ fling(card, 1, matchup, matchup.b); }
+    if(dx < -110){ fling(card, -1, 'a'); }
+    else if(dx > 110){ fling(card, 1, 'b'); }
     else {
       card.style.transition = 'transform .25s';
       card.style.transform = '';
@@ -425,20 +732,20 @@ function attachSwipe(card, matchup){
   card.addEventListener('touchend', onUp);
 }
 
-function fling(card, dir, matchup, winner){
+function fling(card, dir, side){
   card.style.transition = 'transform .35s ease-in, opacity .35s';
   card.style.transform = `translateX(${dir*600}px) rotate(${dir*30}deg)`;
   card.style.opacity = '0';
-  matchup.winner = winner;
   // simulated community vote (demo). Live version = real Firebase tallies.
-  matchup.pct = 52 + Math.floor(Math.random()*37);   // winner share 52-88%
-  matchup.votes = 400 + Math.floor(Math.random()*2800);
-  if(ri < 5){
-    const nm = rounds[ri+1][Math.floor(mi/2)];
-    if(mi % 2 === 0) nm.a = winner; else nm.b = winner;
-  }
-  showLastResult(matchup);
-  done++; mi++;
+  const v = {
+    w: side,
+    pct: 52 + Math.floor(Math.random()*37),
+    v: 400 + Math.floor(Math.random()*2800)
+  };
+  savedVotes.push(v);
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(savedVotes)); }catch(e){}
+  const m = applyVote(v);
+  showLastResult(m);
   renderBracket();
   setTimeout(()=>{ card.remove(); showNext(); }, 330);
 }
@@ -450,12 +757,10 @@ function showLastResult(m){
   const bPct = 100 - aPct;
   const lr = document.getElementById('lastResult');
   lr.style.display = 'block';
-  const lrA = document.getElementById('lrA');
-  const lrB = document.getElementById('lrB');
-  lrA.style.width = aPct + '%';
-  lrB.style.width = bPct + '%';
-  lrA.textContent = `${m.a.n} ${aPct}%`;
-  lrB.textContent = `${bPct}% ${m.b.n}`;
+  document.getElementById('lrA').style.width = aPct + '%';
+  document.getElementById('lrB').style.width = bPct + '%';
+  document.getElementById('lrNameA').textContent = `${m.a.n} ${aPct}%`;
+  document.getElementById('lrNameB').textContent = `${bPct}% ${m.b.n}`;
   document.getElementById('lrVotes').textContent = m.votes.toLocaleString() + ' votes · ' + m.winner.n + ' advances';
 }
 
@@ -477,7 +782,6 @@ function col(title, matchupList, extra=''){
   return `<div class="ncol ${extra}"><div class="ncol-title">${title}</div>${matchupList.map(pairBox).join('')}</div>`;
 }
 function renderBracket(){
-  // left half = regions 0,1 · right half = regions 2,3 · championship center
   const half = k => rounds[k].length/2;
   const L = k => rounds[k].slice(0, half(k));
   const R = k => rounds[k].slice(half(k));
@@ -520,7 +824,6 @@ function renderField(){
 }
 
 function showChampion(champ){
-  done = totalMatchups;
   document.getElementById('progressFill').style.width = '100%';
   document.getElementById('progressText').textContent = 'Tournament complete';
   document.getElementById('roundLabel').textContent = 'Champion';
@@ -533,6 +836,8 @@ function showChampion(champ){
 }
 
 function restart(){
+  try{ localStorage.removeItem(STORE_KEY); }catch(e){}
+  savedVotes = [];
   document.querySelectorAll('.card').forEach(c=>c.remove());
   start();
 }
