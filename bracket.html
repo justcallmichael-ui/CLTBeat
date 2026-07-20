@@ -464,7 +464,17 @@ function start(){
   for(const v of savedVotes){ last = applyVote(v); }
   if(last) showLastResult(last);
   renderBracket();
-  if(currentDay() < 0){ renderBallot(); } else { renderField(); }
+  // Nominations: ballot up top, bracket hidden. Tournament: bracket up, closed ballot at bottom.
+  const fieldSec = document.getElementById('field');
+  const bracketSec = document.getElementById('bracketSection');
+  if(currentDay() < 0){
+    bracketSec.style.display = 'none';
+    bracketSec.parentNode.insertBefore(fieldSec, bracketSec);
+  } else {
+    bracketSec.style.display = '';
+    bracketSec.parentNode.insertBefore(bracketSec, fieldSec);
+  }
+  renderBallot();
   showNext();
 }
 
@@ -569,18 +579,53 @@ window.bumpBallot = function(key){
   const hit = b.find(x => normKey(x.ig)+'|'+normKey(x.n) === key);
   if(hit){ hit.c++; saveBallot(b); renderBallot(); }
 };
+// ---------------- ADMIN MODE (visit ?admin=cltbeat) ----------------
+const IS_ADMIN = new URLSearchParams(location.search).get('admin') === 'cltbeat';
+window.adminEdit = function(key){
+  const b = loadBallot();
+  const hit = b.find(x => normKey(x.ig)+'|'+normKey(x.n) === key);
+  if(!hit) return;
+  const name = prompt('Name:', hit.n);
+  if(name === null) return;
+  const ig = prompt('Instagram handle (blank for none):', hit.ig || '');
+  if(ig === null) return;
+  const c = prompt('Vote count:', hit.c);
+  if(c === null) return;
+  hit.n = name.trim() || hit.n;
+  hit.ig = ig.trim() ? ig.trim().replace(/^@/,'') : null;
+  hit.c = parseInt(c,10) >= 0 ? parseInt(c,10) : hit.c;
+  // merge if the edit made it a duplicate of another entry
+  const dupes = b.filter(x => x !== hit && (normKey(x.n) === normKey(hit.n) || (hit.ig && normKey(x.ig) === normKey(hit.ig))));
+  for(const d of dupes){ hit.c += d.c; b.splice(b.indexOf(d),1); }
+  saveBallot(b); renderBallot();
+};
+window.adminDelete = function(key){
+  const b = loadBallot();
+  const hit = b.find(x => normKey(x.ig)+'|'+normKey(x.n) === key);
+  if(!hit) return;
+  if(!confirm('Remove "'+hit.n+'" from the ballot?')) return;
+  b.splice(b.indexOf(hit),1);
+  saveBallot(b); renderBallot();
+};
 function renderBallot(){
+  const closed = currentDay() >= 0;
   const b = loadBallot().sort((x,y)=>y.c-x.c);
-  document.querySelector('#field h2').innerHTML = 'The Live <span>Ballot</span>';
-  let html = `<div class="ballot"><div class="ballot-note">Top 64 at tip-off make the bracket &middot; final rank = seed &middot; ${b.length} spots on the ballot${b.length<64 ? ' &middot; room for '+(64-b.length)+' more' : ''}</div>`;
+  document.querySelector('#field h2').innerHTML = closed
+    ? 'Final <span>Seeding</span>'
+    : 'The Live <span>Ballot</span>';
+  const note = closed
+    ? `Ballot closed &middot; top 64 made the field &middot; final rank = seed`
+    : `Top 64 at tip-off make the bracket &middot; final rank = seed &middot; ${b.length} spots on the ballot${b.length<64 ? ' &middot; room for '+(64-b.length)+' more' : ''}`;
+  let html = `<div class="ballot"><div class="ballot-note">${note}</div>`;
   b.forEach((x,i)=>{
-    if(i === 64) html += `<div class="cutline">The Cut Line — 64</div>`;
+    if(i === 64) html += `<div class="cutline">${closed ? 'Missed The Cut' : 'The Cut Line — 64'}</div>`;
     const key = normKey(x.ig)+'|'+normKey(x.n);
     html += `<div class="b-row${i<64?' in64':''}">
       <span class="b-rank">${i+1}</span>
       <span class="b-name">${x.n}${x.ig ? ' <a href="https://www.instagram.com/'+x.ig+'/" target="_blank" rel="noopener">@'+x.ig+'</a>' : ''}</span>
       <span class="b-count">${x.c}</span>
-      <button class="b-btn" onclick="bumpBallot('${key}')">+1</button>
+      ${closed ? `` : `<button class="b-btn" onclick="bumpBallot('${key}')">+1</button>`}
+      ${IS_ADMIN ? `<button class="b-btn" style="background:#666" onclick="adminEdit('${key}')">&#9998;</button><button class="b-btn" style="background:var(--red)" onclick="adminDelete('${key}')">&#10005;</button>` : ``}
     </div>`;
   });
   html += `</div>`;
@@ -601,7 +646,7 @@ function showNominate(){
   card.innerHTML = `
     <div class="lock">&#127928;&#128293;&#127829;</div>
     <h2>Nominate your<br><span>favorite spot</span></h2>
-    <div class="nextinfo">Missing from the ballot? Add them &amp; they enter the field instantly.<br>Already on it? Your entry counts as a seeding vote.<br>Tag their Instagram so they can campaign.</div>
+    <div class="nextinfo">Missing from the ballot? Add them &amp; they enter the field instantly.<br>Already on it? Your entry counts as a seeding vote.<br>Tag their Instagram so they can campaign.<br><br>&#127829; Pizza places only — anything else gets removed.</div>
     <input id="nomName" placeholder="Pizza spot name" maxlength="40">
     <input id="nomIg" placeholder="@their_instagram" maxlength="40">
     <button id="nomBtn">Add / Vote</button>
