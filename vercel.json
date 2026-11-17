@@ -1,6 +1,6 @@
 {
-  "rewrites": [
-    {"source": "/", "has": [{"type": "host", "value": "www.bestofclt.com"}], "destination": "/bestofclt.html"},
-    {"source": "/", "has": [{"type": "host", "value": "bestofclt.com"}], "destination": "/bestofclt.html"}
+  "redirects": [
+    {"source": "/", "has": [{"type": "host", "value": "www.bestofclt.com"}], "destination": "/bestofclt.html", "permanent": false},
+    {"source": "/", "has": [{"type": "host", "value": "bestofclt.com"}], "destination": "/bestofclt.html", "permanent": false}
   ]
 }
